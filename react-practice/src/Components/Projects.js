@@ -6,6 +6,7 @@ class Projects extends Component {
         <ul>
           <li>SOLVER</li>
           <li>IRIONEORA</li>
+          <li>AliceinSQLand</li>
         </ul>
       );
     }
