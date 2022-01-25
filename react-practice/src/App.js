@@ -1,6 +1,8 @@
 import './App.css';
+// 컴포넌트 등록
 import React, { Component } from 'react';
-import Contents from './Components/Contents';
+import ReadContents from './Components/ReadContents';
+import Control from './Components/Control';
 import Profile from './Components/Profile';
 import Projects from './Components/Projects';
 
@@ -58,10 +60,9 @@ class App extends Component {
           title={this.state.profile.name}
           sub={this.state.profile.age}
           onChangePage={function(){
-            this.setState({
-              mode: 'second'
-            });
-          }.bind(this)}>
+            this.setState({mode: 'first'});
+          }.bind(this)}
+        >
         </Profile>
         {/* <div> */}
           {/* 이렇게 했더니 a 태그를 클릭할 때마다 reload 되는 문제 발생 */}
@@ -92,14 +93,19 @@ class App extends Component {
           {/* // <h3>{this.state.profile.age}</h3>
         // </div> */}
         <Profile title={_title} sub={_desc}></Profile>
-        <Contents 
-          onChangePage={function(){
+        <ReadContents 
+          onChangePage={function(id){
             this.setState({
               mode:'second',
-              selected_content_id: 0,
-            })
+              selected_content_id: Number(id),
+            });
           }.bind(this)}
-          data={this.state.contents}></Contents>
+          data={this.state.contents}></ReadContents>
+        <Control
+          onChangeMode={function(_mode){
+            this.setState({mode:_mode})
+          }.bind(this)}
+        ></Control>
         <Projects></Projects>
       </div>
     )

@@ -6,7 +6,8 @@ class Profile extends Component {
         <div>
           <h1><a href="/" onClick={function(e){
             e.preventDefault();
-            this.props.onChangePage();
+            console.log(this.props);
+            console.log(this.props.onChangePage());
           }.bind(this)}>{ this.props.title }</a></h1>
           <h3>{ this.props.sub }</h3>
         </div>
