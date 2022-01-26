@@ -1,35 +1,38 @@
 import React, { Component } from "react"
 
-class ReadContents extends Component {
+class CreateContents extends Component {
     render() {
-      const data = this.props.data;
-      var lists = []
-      var i = 0;
-      while (i < data.length){
-        lists.push(
-        <li key={data[i].id}>
-          <a
-            href={"/content/"+ data[i].id}
-            data-id = {data[i].id}
-            // event에서 target을 console에 찍어보면
-            // 이벤트가 발생한 tag를 가리킴(여기서는 a태그)
-            // 그 중 dataset에 접근하면 여기서의 data-id에 접근할수 있음
-            // 다른 이름으로 쓰면 안되네..? 이유는 모르겠다
-            onClick={function(e){
-              e.preventDefault();
-              this.props.onChangePage(e.target.dataset.id);
-            }.bind(this)}
-          >{data[i].title}: {data[i].desc}
-          </a>
-        </li>)
-        i += 1;
-      }
       return (
         <div>
-          { lists }
+          <h2>Create</h2>
+            <form action="/create_process" method="POST"
+              onSubmit={function(e){
+                e.preventDefault();
+                // alert('submit!')
+                // debugger;
+
+                // 이곳의 인자로 title, desc를 주어야하는데
+                // 그것을 어떻게 하면 좋을지 고려해보자.
+                // e.target.title.value와 e.target.desc.value를 console에 찍어보았더니 가능
+                this.props.onSubmit(
+                  e.target.title.value,
+                  e.target.desc.value
+                );
+              }.bind(this)}
+            >
+              <p>
+                <input type="text" name="title" placeholder="title"></input>
+              </p>
+              <p>
+                <textarea name="desc" placeholder="description"></textarea>
+              </p>
+              <p>
+                <input type="submit"></input>
+              </p>
+            </form>
         </div>
-      )
+      );
     }
   }
 
-export default ReadContents
+export default CreateContents
